@@ -1,17 +1,16 @@
-JSON
 [
   {
-    "ticker": "NOVO-B.CO",
-    "nom": "Novo Nordisk",
-    "bpa": 3.50,
-    "pru": 59.5,
+    "ticker": "DIM.PA",
+    "nom": "Sartorius Stedim",
+    "bpa": 4.50,
+    "pru": 180.0,
     "quantite": 20
   },
   {
-    "ticker": "SAP",
-    "nom": "SAP",
-    "bpa": 6.41,
-    "pru": 144.96,
-    "quantite": 20
+    "ticker": "IDL.PA",
+    "nom": "ID Logistics",
+    "bpa": 18.20,
+    "pru": 310.0,
+    "quantite": 10
   }
 ]
