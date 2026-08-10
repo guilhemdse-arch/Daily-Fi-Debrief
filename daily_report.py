@@ -97,7 +97,10 @@ def fetch_ticker_report(entry: dict) -> dict:
 
     trend = None
     if not pd.isna(sma50) and not pd.isna(sma200):
-        trend = "haussière (SMA50 > SMA200)" if sma50 > sma200 else "baissière (SMA50 < SMA200)"
+        if sma50 > sma200:
+            trend = "haussière (SMA50 au-dessus de la SMA200)"
+        else:
+            trend = "baissière (SMA50 en dessous de la SMA200)"
 
     # Fondamentaux : best-effort, pas toujours disponibles selon le titre/l'ETF
     info = {}
@@ -131,18 +134,20 @@ def fetch_ticker_report(entry: dict) -> dict:
         pass
 
     # Agenda : prochaine date de résultats si dans la fenêtre définie
+    # (non applicable aux ETF, qui n'ont pas de publication de résultats)
     upcoming_events = []
-    try:
-        earnings_dates = retry(ticker.get_earnings_dates, limit=4)
-        if earnings_dates is not None and not earnings_dates.empty:
-            now = pd.Timestamp.now(tz=earnings_dates.index.tz)
-            future = earnings_dates[earnings_dates.index >= now]
-            if not future.empty:
-                next_date = future.index[0]
-                if (next_date - now).days <= EARNINGS_LOOKAHEAD_DAYS:
-                    upcoming_events.append(f"Résultats prévus le {next_date.strftime('%d/%m/%Y')}")
-    except Exception:
-        pass
+    if not is_etf:
+        try:
+            earnings_dates = retry(ticker.get_earnings_dates, limit=4)
+            if earnings_dates is not None and not earnings_dates.empty:
+                now = pd.Timestamp.now(tz=earnings_dates.index.tz)
+                future = earnings_dates[earnings_dates.index >= now]
+                if not future.empty:
+                    next_date = future.index[0]
+                    if (next_date - now).days <= EARNINGS_LOOKAHEAD_DAYS:
+                        upcoming_events.append(f"Résultats prévus le {next_date.strftime('%d/%m/%Y')}")
+        except Exception:
+            pass
 
     return {
         "symbol": symbol,
@@ -182,7 +187,7 @@ def build_ticker_block(r: dict) -> str:
     if not pd.isna(r["sma200"]):
         tech_bits.append(f"SMA200: {fmt_num(r['sma200'])}")
     if r["trend"]:
-        tech_bits.append(f"tendance {r['trend']}")
+        tech_bits.append(f"tendance {html.escape(r['trend'])}")
     lines.append(" | ".join(tech_bits))
 
     fond_bits = []
