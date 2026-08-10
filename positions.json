@@ -1,0 +1,17 @@
+JSON
+[
+  {
+    "ticker": "NOVO-B.CO",
+    "nom": "Novo Nordisk",
+    "bpa": 3.50,
+    "pru": 59.5,
+    "quantite": 20
+  },
+  {
+    "ticker": "SAP",
+    "nom": "SAP",
+    "bpa": 6.41,
+    "pru": 144.96,
+    "quantite": 20
+  }
+]
