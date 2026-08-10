@@ -4,7 +4,7 @@ import requests
 import yfinance as yf
 
 # Indice CAC Mid & Small sur Yahoo Finance
-BENCHMARK_TICKER = "^CACMS"
+BENCHMARK_TICKER = "EESM.PA"
 PERIOD_DAYS = 126  # Environ 6 mois de cotation (jours ouvrés)
 
 def send_telegram_alert(message):
