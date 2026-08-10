@@ -1,0 +1,8 @@
+[
+  {"symbol": "AAPL", "name": "Apple", "type": "stock"},
+  {"symbol": "MSFT", "name": "Microsoft", "type": "stock"},
+  {"symbol": "MC.PA", "name": "LVMH", "type": "stock"},
+  {"symbol": "OR.PA", "name": "L'Oréal", "type": "stock"},
+  {"symbol": "CW8.PA", "name": "Amundi MSCI World", "type": "etf"},
+  {"symbol": "ESE.PA", "name": "Amundi S&P 500", "type": "etf"}
+]
