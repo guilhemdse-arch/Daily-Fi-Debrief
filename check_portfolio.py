@@ -12,7 +12,8 @@ def send_telegram_alert(message):
     chat_id = os.environ.get("8532103043")
     if token and chat_id:
         url = f"https://api.telegram.org/bot{token}/sendMessage"
-        requests.post(url, data={"chat_id": chat_id, "text": message, "parse_mode": "Markdown"})
+        response = requests.post(url, data={"chat_id": chat_id, "text": message, "parse_mode": "Markdown"})
+        print(f"Statut Telegram : {response.status_code} | Réponse : {response.text}")
 
 def main():
     with open("positions.json", "r") as f:
