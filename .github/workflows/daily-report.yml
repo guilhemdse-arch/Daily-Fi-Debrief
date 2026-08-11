@@ -8,6 +8,9 @@ on:
     - cron: "15 20 * * 1-5"
   workflow_dispatch: {}  # permet de lancer le workflow manuellement pour tester
 
+permissions:
+  contents: write
+  
 jobs:
   send-report:
     runs-on: ubuntu-latest
@@ -21,8 +24,16 @@ jobs:
       - name: Installer les dépendances
         run: pip install -r requirements.txt
 
-      - name: Générer et envoyer le rapport
+      - name: Générer et envoyer le rapport et l'envoyer sur Telegram
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python daily_report.py
+
+      - name: Committer l'historique mis à jour (docs/data.json)
+        run: |
+          git config user.name "portfolio-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/data.json
+          git diff --quiet --cached || git commit -m "Mise à jour quotidienne $(date -u +%F)"
+          git push
