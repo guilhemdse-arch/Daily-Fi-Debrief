@@ -28,6 +28,7 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DASHBOARD_URL: "https://guilhemdse-arch.github.io/Daily-Fi-Debrief/"
         run: python daily_report.py
 
       - name: Committer l'historique mis à jour (docs/data.json)
