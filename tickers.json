@@ -1,8 +1,10 @@
 [
-  {"symbol": "AAPL", "name": "Apple", "type": "stock"},
+  {"symbol": "ASML", "name": "ASML", "type": "stock"},
   {"symbol": "MSFT", "name": "Microsoft", "type": "stock"},
-  {"symbol": "MC.PA", "name": "LVMH", "type": "stock"},
-  {"symbol": "OR.PA", "name": "L'Oréal", "type": "stock"},
-  {"symbol": "CW8.PA", "name": "Amundi MSCI World", "type": "etf"},
-  {"symbol": "ESE.PA", "name": "Amundi S&P 500", "type": "etf"}
+  {"symbol": "SAP", "name": "SAP", "type": "stock"},
+  {"symbol": "NOVD.XD", "name": "Novo Nordisk", "type": "stock"},
+  {"symbol": "SXR8D.XD", "name": "ishares S&P 500", "type": "etf"},
+  {"symbol": "EXW1.DE", "name": "ishares Eurostoxx 50", "type": "etf"}
+  {"symbol": "EUNL.DE", "name": "iShares Core MSCI World", "type": "etf"}
+  {"symbol": "PAEEM.PA", "name": "Amundi PEA Émergent", "type": "etf"}
 ]
