@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registre du portefeuille</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --paper: #F7F5EF;
+    --paper-raised: #FFFFFF;
+    --ink: #22291F;
+    --ink-soft: #5B6355;
+    --brass: #8A6D3B;
+    --hairline: #DAD5C6;
+    --green: #2F6D4F;
+    --green-bg: #E7EFE7;
+    --amber: #A8721F;
+    --amber-bg: #F3E9D4;
+    --red: #9C4433;
+    --red-bg: #F3E1DA;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 48px 24px 96px; }
+
+  header {
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 28px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: 34px;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+  }
+
+  .subtitle {
+    color: var(--ink-soft);
+    font-size: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--hairline);
+    border: 1px solid var(--hairline);
+    margin-bottom: 40px;
+  }
+
+  .stat {
+    background: var(--paper-raised);
+    padding: 18px 20px;
+  }
+
+  .stat .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+
+  .stat .value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 26px;
+    font-weight: 500;
+  }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  thead th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    font-weight: 500;
+    padding: 0 12px 10px;
+    border-bottom: 1px solid var(--ink);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  thead th:hover { color: var(--ink); }
+  thead th.sorted::after { content: " ▾"; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--hairline);
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  tbody tr:hover { background: rgba(138, 109, 59, 0.06); }
+
+  tbody td { padding: 14px 12px; vertical-align: middle; }
+
+  .ticker-name { font-weight: 500; }
+  .ticker-symbol {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .num { font-family: 'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
+  .change-up { color: var(--green); }
+  .change-down { color: var(--red); }
+
+  .score-bar {
+    display: inline-block;
+    width: 60px;
+    height: 5px;
+    background: var(--hairline);
+    position: relative;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .score-bar span {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: var(--brass);
+  }
+
+  .stamp {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border: 1.5px solid currentColor;
+    border-radius: 3px;
+    transform: rotate(-1.5deg);
+  }
+  .stamp.hold { color: var(--green); background: var(--green-bg); }
+  .stamp.watch { color: var(--amber); background: var(--amber-bg); }
+  .stamp.sell { color: var(--red); background: var(--red-bg); }
+  .stamp.na { color: var(--ink-soft); background: transparent; }
+
+  .flags { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
+
+  .detail {
+    display: none;
+    background: var(--paper-raised);
+    border: 1px solid var(--hairline);
+    border-top: none;
+    padding: 20px 24px 28px;
+  }
+  .detail.open { display: block; }
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  .detail-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    line-height: 2;
+    color: var(--ink-soft);
+  }
+  .detail-meta b { color: var(--ink); font-weight: 500; }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--hairline);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .empty-state {
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--ink-soft);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+  }
+
+  @media (max-width: 640px) {
+    .detail-grid { grid-template-columns: 1fr; }
+    thead th:nth-child(3), tbody td:nth-child(3) { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Registre du portefeuille</h1>
+      <div class="subtitle" id="generated-at">—</div>
+    </div>
+  </header>
+
+  <div class="stats" id="stats"></div>
+
+  <table id="table">
+    <thead>
+      <tr>
+        <th data-key="name">Titre</th>
+        <th data-key="close">Cours</th>
+        <th data-key="change">Var. jour</th>
+        <th data-key="score" class="sorted">Score</th>
+        <th data-key="signal">Signal</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+
+  <div id="empty" class="empty-state" style="display:none;">
+    Aucune donnée pour le moment — ce fichier sera rempli après le premier run du workflow GitHub Actions.
+  </div>
+
+  <footer>
+    Score indicatif construit sur des seuils inspirés de la méthode de William Higgons (décote + qualité).
+    Ne constitue pas un conseil en investissement.
+  </footer>
+</div>
+
+<script>
+  const SIGNAL_CLASS = (signal) => {
+    if (!signal) return 'na';
+    if (signal.includes('Vendre')) return 'sell';
+    if (signal.includes('Surveiller')) return 'watch';
+    if (signal.includes('Conserver')) return 'hold';
+    return 'na';
+  };
+
+  const SIGNAL_LABEL = (signal) => {
+    if (!signal) return 'N/D';
+    return signal.replace(/^[^\w]+/u, '').trim();
+  };
+
+  let sortKey = 'score';
+  let sortDir = -1;
+  let rows = [];
+  const openCharts = {};
+
+  function fmtNum(v, decimals = 2) {
+    if (v === null || v === undefined || Number.isNaN(v)) return '—';
+    return v.toLocaleString('fr-FR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+  }
+
+  function buildRows(data) {
+    return Object.entries(data.tickers || {}).map(([symbol, t]) => {
+      const hist = t.history || [];
+      const last = hist[hist.length - 1] || {};
+      return {
+        symbol,
+        name: t.name || symbol,
+        close: last.close,
+        change: last.day_change_pct,
+        score: last.score,
+        signal: last.signal,
+        flags: last.flags || [],
+        history: hist,
+      };
+    });
+  }
+
+  function renderStats(data, rowsData) {
+    const withScore = rowsData.filter(r => typeof r.score === 'number');
+    const avgScore = withScore.length ? Math.round(withScore.reduce((s, r) => s + r.score, 0) / withScore.length) : null;
+    const sellCount = rowsData.filter(r => r.signal && r.signal.includes('Vendre')).length;
+    const watchCount = rowsData.filter(r => r.signal && r.signal.includes('Surveiller')).length;
+
+    document.getElementById('stats').innerHTML = `
+      <div class="stat"><div class="label">Titres suivis</div><div class="value">${rowsData.length}</div></div>
+      <div class="stat"><div class="label">Score moyen</div><div class="value">${avgScore ?? '—'}</div></div>
+      <div class="stat"><div class="label">Signaux Vendre</div><div class="value">${sellCount}</div></div>
+      <div class="stat"><div class="label">Signaux Surveiller</div><div class="value">${watchCount}</div></div>
+    `;
+
+    const gen = data.generated_at ? new Date(data.generated_at) : null;
+    document.getElementById('generated-at').textContent = gen
+      ? 'Mise à jour le ' + gen.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+      : 'Pas encore mis à jour';
+  }
+
+  function renderTable() {
+    const sorted = [...rows].sort((a, b) => {
+      let av = a[sortKey], bv = b[sortKey];
+      if (sortKey === 'name') { av = a.name; bv = b.name; return sortDir * av.localeCompare(bv); }
+      av = (av === null || av === undefined) ? -Infinity : av;
+      bv = (bv === null || bv === undefined) ? -Infinity : bv;
+      return sortDir * (av - bv);
+    });
+
+    const body = document.getElementById('table-body');
+    body.innerHTML = '';
+
+    sorted.forEach(r => {
+      const tr = document.createElement('tr');
+      const changeClass = (r.change ?? 0) >= 0 ? 'change-up' : 'change-down';
+      const scorePct = typeof r.score === 'number' ? Math.max(0, Math.min(100, r.score)) : 0;
+      tr.innerHTML = `
+        <td>
+          <span class="ticker-name">${r.name}</span>
+          <span class="ticker-symbol">${r.symbol}</span>
+        </td>
+        <td class="num">${fmtNum(r.close)}</td>
+        <td class="num ${changeClass}">${r.change === null || r.change === undefined ? '—' : (r.change >= 0 ? '+' : '') + fmtNum(r.change) + '%'}</td>
+        <td>
+          <span class="score-bar"><span style="width:${scorePct}%"></span></span>
+          <span class="num">${r.score ?? '—'}</span>
+        </td>
+        <td>
+          <span class="stamp ${SIGNAL_CLASS(r.signal)}">${SIGNAL_LABEL(r.signal)}</span>
+          ${r.flags.length ? `<div class="flags">${r.flags.join(' · ')}</div>` : ''}
+        </td>
+      `;
+
+      const detailRow = document.createElement('tr');
+      const detailCell = document.createElement('td');
+      detailCell.colSpan = 5;
+      detailCell.style.padding = '0';
+      const detail = document.createElement('div');
+      detail.className = 'detail';
+      const canvasId = 'chart-' + r.symbol.replace(/[^a-zA-Z0-9]/g, '_');
+      const lastPoint = r.history[r.history.length - 1] || {};
+      detail.innerHTML = `
+        <div class="detail-grid">
+          <canvas id="${canvasId}" height="140"></canvas>
+          <div class="detail-meta">
+            <div>PER&nbsp;: <b>${lastPoint.pe_ratio != null ? fmtNum(lastPoint.pe_ratio, 1) : '—'}</b></div>
+            <div>ROE&nbsp;: <b>${lastPoint.roe_pct != null ? fmtNum(lastPoint.roe_pct, 1) + '%' : '—'}</b></div>
+            <div>Points de suivi&nbsp;: <b>${r.history.length}</b></div>
+            <div>Dernière alerte&nbsp;: <b>${r.flags.length ? r.flags.join(', ') : 'aucune'}</b></div>
+          </div>
+        </div>
+      `;
+      detailCell.appendChild(detail);
+      detailRow.appendChild(detailCell);
+
+      tr.addEventListener('click', () => {
+        const isOpen = detail.classList.toggle('open');
+        if (isOpen && !openCharts[r.symbol] && r.history.length > 1) {
+          const ctx = document.getElementById(canvasId).getContext('2d');
+          openCharts[r.symbol] = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: r.history.map(h => h.date),
+              datasets: [
+                {
+                  label: 'Score',
+                  data: r.history.map(h => h.score),
+                  borderColor: '#8A6D3B',
+                  backgroundColor: 'transparent',
+                  yAxisID: 'y',
+                  tension: 0.25,
+                },
+                {
+                  label: 'Cours',
+                  data: r.history.map(h => h.close),
+                  borderColor: '#22291F',
+                  backgroundColor: 'transparent',
+                  yAxisID: 'y1',
+                  tension: 0.25,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              interaction: { mode: 'index', intersect: false },
+              scales: {
+                y: { position: 'left', min: 0, max: 100, title: { display: true, text: 'Score' } },
+                y1: { position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Cours' } },
+              },
+              plugins: { legend: { labels: { font: { family: 'IBM Plex Mono' } } } },
+            },
+          });
+        }
+      });
+
+      body.appendChild(tr);
+      body.appendChild(detailRow);
+    });
+  }
+
+  document.querySelectorAll('thead th').forEach(th => {
+    th.addEventListener('click', () => {
+      const key = th.dataset.key;
+      if (sortKey === key) { sortDir *= -1; } else { sortKey = key; sortDir = -1; }
+      document.querySelectorAll('thead th').forEach(h => h.classList.remove('sorted'));
+      th.classList.add('sorted');
+      renderTable();
+    });
+  });
+
+  fetch('data.json?_=' + Date.now())
+    .then(res => res.json())
+    .then(data => {
+      rows = buildRows(data);
+      if (!rows.length) {
+        document.getElementById('empty').style.display = 'block';
+        document.getElementById('stats').style.display = 'none';
+        document.getElementById('table').style.display = 'none';
+        return;
+      }
+      renderStats(data, rows);
+      renderTable();
+    })
+    .catch(err => {
+      document.getElementById('empty').style.display = 'block';
+      document.getElementById('empty').textContent = "Impossible de charger data.json (normal si tu ouvres ce fichier en local plutôt que via GitHub Pages).";
+      console.error(err);
+    });
+</script>
+</body>
+</html>
