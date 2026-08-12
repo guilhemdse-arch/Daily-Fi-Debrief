@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-12T09:29:37.980746",
+  "generated_at": "2026-08-12T20:02:51.251355",
   "tickers": {
-   "MSFT": {
+    "MSFT": {
       "name": "Microsoft",
       "history": [
         {
@@ -27,6 +27,18 @@
           ],
           "pe_ratio": 28.161543,
           "roe_pct": 34.039003
+        },
+        {
+          "date": "2026-08-12",
+          "close": 492.42999267578125,
+          "day_change_pct": -2.2587890152951937,
+          "score": 50,
+          "signal": "🔴 Vendre",
+          "flags": [
+            "Valorisation élevée"
+          ],
+          "pe_ratio": 27.448717,
+          "roe_pct": 34.039003
         }
       ]
     },
@@ -43,6 +55,18 @@
             "Valorisation élevée"
           ],
           "pe_ratio": 61.41229,
+          "roe_pct": 53.942
+        },
+        {
+          "date": "2026-08-12",
+          "close": 1810.0699462890625,
+          "day_change_pct": 0.5940902631596264,
+          "score": 50,
+          "signal": "🔴 Vendre",
+          "flags": [
+            "Valorisation élevée"
+          ],
+          "pe_ratio": 61.713943,
           "roe_pct": 53.942
         }
       ]
@@ -61,6 +85,18 @@
           ],
           "pe_ratio": 27.020617,
           "roe_pct": 18.320999
+        },
+        {
+          "date": "2026-08-12",
+          "close": 204.09500122070312,
+          "day_change_pct": -2.6635786198800315,
+          "score": 47,
+          "signal": "🔴 Vendre",
+          "flags": [
+            "Valorisation élevée"
+          ],
+          "pe_ratio": 26.437178,
+          "roe_pct": 18.320999
         }
       ]
     },
@@ -71,6 +107,16 @@
           "date": "2026-08-12",
           "close": 66.80000305175781,
           "day_change_pct": 0.3153727668065523,
+          "score": null,
+          "signal": "Données insuffisantes",
+          "flags": [],
+          "pe_ratio": null,
+          "roe_pct": null
+        },
+        {
+          "date": "2026-08-12",
+          "close": 66.5999984741211,
+          "day_change_pct": 0.015020478721332196,
           "score": null,
           "signal": "Données insuffisantes",
           "flags": [],
@@ -91,6 +137,16 @@
           "flags": [],
           "pe_ratio": null,
           "roe_pct": null
+        },
+        {
+          "date": "2026-08-12",
+          "close": 128.7949981689453,
+          "day_change_pct": 0.031061539059559464,
+          "score": null,
+          "signal": "Données insuffisantes",
+          "flags": [],
+          "pe_ratio": null,
+          "roe_pct": null
         }
       ]
     },
@@ -101,6 +157,16 @@
           "date": "2026-08-12",
           "close": 35.39500045776367,
           "day_change_pct": 1.6805488692727077,
+          "score": null,
+          "signal": "Données insuffisantes",
+          "flags": [],
+          "pe_ratio": null,
+          "roe_pct": null
+        },
+        {
+          "date": "2026-08-12",
+          "close": 35.51499938964844,
+          "day_change_pct": 2.0252743135435556,
           "score": null,
           "signal": "Données insuffisantes",
           "flags": [],
