@@ -592,11 +592,11 @@ def main():
             errors.append(f"{symbol}: {e}")
         time.sleep(1)  # espace les appels pour limiter le risque de rate-limit
 
-    if signal_changes:
-       insert_at = 2 if dashboard_url else 1
+     if signal_changes:
+        insert_at = 2 if dashboard_url else 1
         blocks.insert(insert_at, "🔔 <b>Changements de signal aujourd'hui</b>\n" +
                       "\n".join(html.escape(c) for c in signal_changes))
-
+       
     if errors:
         blocks.append("⚠️ <b>Titres non récupérés</b>\n" + "\n".join(html.escape(e) for e in errors))
 
