@@ -555,11 +555,11 @@ def main():
     blocks = [f"📈 <b>Récapitulatif du portefeuille — {today_label}</b>"]
     if dashboard_url:
         blocks[0] += f"\n🔗 <a href=\"{html.escape(dashboard_url)}\">Dashboard complet</a>"
- 
+
     dashboard_url = os.environ.get("DASHBOARD_URL", "").strip()
     if dashboard_url:
         blocks.append(f'🔗 <a href="{html.escape(dashboard_url)}">Voir le dashboard complet</a>')
-    
+
     signal_changes = []
     errors = []
 
@@ -592,11 +592,11 @@ def main():
             errors.append(f"{symbol}: {e}")
         time.sleep(1)  # espace les appels pour limiter le risque de rate-limit
 
-     if signal_changes:
+    if signal_changes:
         insert_at = 2 if dashboard_url else 1
         blocks.insert(insert_at, "🔔 <b>Changements de signal aujourd'hui</b>\n" +
                       "\n".join(html.escape(c) for c in signal_changes))
-       
+
     if errors:
         blocks.append("⚠️ <b>Titres non récupérés</b>\n" + "\n".join(html.escape(e) for e in errors))
 
