@@ -2,10 +2,10 @@ name: Rapport quotidien portefeuille
 
 on:
   schedule:
-    # 20:15 UTC = 22:15 heure d'été à Paris (CEST, UTC+2) / 21:15 en hiver (CET, UTC+1).
+    # 16:30 UTC = 18:30 heure d'été à Paris (CEST, UTC+2) / 19:30 en hiver (CET, UTC+1).
     # GitHub Actions ne gère pas le changement d'heure automatiquement :
-    # décale la valeur d'une heure toi-même si besoin selon la saison.
-    - cron: "15 20 * * 1-5"
+    # passe à "30 17 * * *" fin octobre pour rester sur 18:30 heure de Paris en hiver.
+    - cron: "30 16 * * *"
   workflow_dispatch: {}  # permet de lancer le workflow manuellement pour tester
 
 permissions:
