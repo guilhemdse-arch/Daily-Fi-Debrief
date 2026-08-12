@@ -539,6 +539,7 @@ def clean_for_json(value):
 def main():
     token = os.environ.get("TELEGRAM_BOT_TOKEN")
     chat_id = os.environ.get("TELEGRAM_CHAT_ID")
+    dashboard_url = os.environ.get("DASHBOARD_URL", "").strip()
     if not token or not chat_id:
         print("TELEGRAM_BOT_TOKEN et TELEGRAM_CHAT_ID doivent être définis (secrets GitHub).", file=sys.stderr)
         sys.exit(1)
@@ -552,6 +553,13 @@ def main():
     benchmark_cache = {}
 
     blocks = [f"📈 <b>Récapitulatif du portefeuille — {today_label}</b>"]
+    if dashboard_url:
+        blocks[0] += f"\n🔗 <a href=\"{html.escape(dashboard_url)}\">Dashboard complet</a>"
+ 
+    dashboard_url = os.environ.get("DASHBOARD_URL", "").strip()
+    if dashboard_url:
+        blocks.append(f'🔗 <a href="{html.escape(dashboard_url)}">Voir le dashboard complet</a>')
+    
     signal_changes = []
     errors = []
 
@@ -585,7 +593,8 @@ def main():
         time.sleep(1)  # espace les appels pour limiter le risque de rate-limit
 
     if signal_changes:
-        blocks.insert(1, "🔔 <b>Changements de signal aujourd'hui</b>\n" +
+       insert_at = 2 if dashboard_url else 1
+        blocks.insert(insert_at, "🔔 <b>Changements de signal aujourd'hui</b>\n" +
                       "\n".join(html.escape(c) for c in signal_changes))
 
     if errors:
