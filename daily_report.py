@@ -557,8 +557,6 @@ def main():
         blocks[0] += f"\n🔗 <a href=\"{html.escape(dashboard_url)}\">Dashboard complet</a>"
 
     dashboard_url = os.environ.get("DASHBOARD_URL", "").strip()
-    if dashboard_url:
-        blocks.append(f'🔗 <a href="{html.escape(dashboard_url)}">Voir le dashboard complet</a>')
 
     signal_changes = []
     errors = []
