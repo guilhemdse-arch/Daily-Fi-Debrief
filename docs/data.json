@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T19:47:33.288065",
+  "generated_at": "2026-08-14T19:37:43.824676",
   "tickers": {
     "MSFT": {
       "name": "Microsoft",
@@ -51,6 +51,18 @@
           ],
           "pe_ratio": 27.693657,
           "roe_pct": 34.039003
+        },
+        {
+          "date": "2026-08-14",
+          "close": 495.4700012207031,
+          "day_change_pct": -0.2837714635834299,
+          "score": 50,
+          "signal": "🔴 Vendre",
+          "flags": [
+            "Valorisation élevée"
+          ],
+          "pe_ratio": 27.61622,
+          "roe_pct": 34.039003
         }
       ]
     },
@@ -91,6 +103,18 @@
             "Valorisation élevée"
           ],
           "pe_ratio": 62.649494,
+          "roe_pct": 53.942
+        },
+        {
+          "date": "2026-08-14",
+          "close": 1826.5350341796875,
+          "day_change_pct": -1.156176738573802,
+          "score": 50,
+          "signal": "🔴 Vendre",
+          "flags": [
+            "Valorisation élevée"
+          ],
+          "pe_ratio": 62.169334,
           "roe_pct": 53.942
         }
       ]
@@ -133,6 +157,18 @@
           ],
           "pe_ratio": 27.139898,
           "roe_pct": 18.320999
+        },
+        {
+          "date": "2026-08-14",
+          "close": 208.35000610351562,
+          "day_change_pct": -0.44437723681468694,
+          "score": 47,
+          "signal": "🔴 Vendre",
+          "flags": [
+            "Valorisation élevée"
+          ],
+          "pe_ratio": 27.058443,
+          "roe_pct": 18.320999
         }
       ]
     },
@@ -163,6 +199,16 @@
           "date": "2026-08-13",
           "close": 66.70999908447266,
           "day_change_pct": -0.08985706396614043,
+          "score": null,
+          "signal": "Données insuffisantes",
+          "flags": [],
+          "pe_ratio": null,
+          "roe_pct": null
+        },
+        {
+          "date": "2026-08-14",
+          "close": 66.63999938964844,
+          "day_change_pct": 0.06006143610181461,
           "score": null,
           "signal": "Données insuffisantes",
           "flags": [],
@@ -203,6 +249,16 @@
           "flags": [],
           "pe_ratio": null,
           "roe_pct": null
+        },
+        {
+          "date": "2026-08-14",
+          "close": 128.86500549316406,
+          "day_change_pct": 0.054355623443480876,
+          "score": null,
+          "signal": "Données insuffisantes",
+          "flags": [],
+          "pe_ratio": null,
+          "roe_pct": null
         }
       ]
     },
@@ -233,6 +289,16 @@
           "date": "2026-08-13",
           "close": 35.775001525878906,
           "day_change_pct": 2.126756416053135,
+          "score": null,
+          "signal": "Données insuffisantes",
+          "flags": [],
+          "pe_ratio": null,
+          "roe_pct": null
+        },
+        {
+          "date": "2026-08-14",
+          "close": 35.53499984741211,
+          "day_change_pct": 0.056315523320835004,
           "score": null,
           "signal": "Données insuffisantes",
           "flags": [],
