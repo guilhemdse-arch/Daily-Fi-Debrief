@@ -5,7 +5,7 @@ on:
     # 16:30 UTC = 18:30 heure d'été à Paris (CEST, UTC+2) / 19:30 en hiver (CET, UTC+1).
     # GitHub Actions ne gère pas le changement d'heure automatiquement :
     # passe à "30 17 * * *" fin octobre pour rester sur 18:30 heure de Paris en hiver.
-    - cron: "30 14 * * *"
+    - cron: "30 15 * * *"
   workflow_dispatch: {}  # permet de lancer le workflow manuellement pour tester
 
 permissions:
