@@ -98,6 +98,23 @@ def is_valid_number(value):
     return value is not None and not (isinstance(value, float) and pd.isna(value))
 
 
+def summarize_technicals(rsi, trend):
+    """Résumé qualitatif en une phrase, sans afficher les chiffres bruts de RSI/SMA."""
+    bits = []
+    if trend:
+        bits.append(f"tendance {trend}")
+    if is_valid_number(rsi):
+        if rsi < 30:
+            bits.append("RSI en zone de survente")
+        elif rsi > 70:
+            bits.append("RSI en zone de surachat")
+        else:
+            bits.append("RSI neutre")
+    if not bits:
+        return None
+    return bits[0][0].upper() + bits[0][1:] + ((", " + ", ".join(bits[1:])) if len(bits) > 1 else "")
+
+
 # --------------------------------------------------------------------------
 # Indicateurs techniques
 # --------------------------------------------------------------------------
@@ -223,10 +240,7 @@ def fetch_ticker_report(entry: dict, benchmark_cache: dict) -> dict:
 
     trend = None
     if not pd.isna(sma50) and not pd.isna(sma200):
-        if sma50 > sma200:
-            trend = "haussière (SMA50 au-dessus de la SMA200)"
-        else:
-            trend = "baissière (SMA50 en dessous de la SMA200)"
+        trend = "haussière" if sma50 > sma200 else "baissière"
 
     relative_momentum_pct = compute_relative_momentum(hist, symbol, benchmark_cache)
 
@@ -242,6 +256,9 @@ def fetch_ticker_report(entry: dict, benchmark_cache: dict) -> dict:
     dividend_yield = info.get("dividendYield")
     beta = info.get("beta") if not is_etf else None
     market_cap = info.get("marketCap")
+    currency = info.get("currency") or ""
+    target_mean_price = info.get("targetMeanPrice") if not is_etf else None
+    analyst_count = info.get("numberOfAnalystOpinions") if not is_etf else None
 
     roe_pct = None
     if is_valid_number(info.get("returnOnEquity")):
@@ -304,6 +321,7 @@ def fetch_ticker_report(entry: dict, benchmark_cache: dict) -> dict:
         "name": name,
         "is_etf": is_etf,
         "last_close": last_close,
+        "currency": currency,
         "day_change_pct": day_change_pct,
         "last_volume": last_volume,
         "avg_volume_20d": avg_volume_20d,
@@ -325,6 +343,8 @@ def fetch_ticker_report(entry: dict, benchmark_cache: dict) -> dict:
         "roce_pct": roce_pct,
         "debt_to_equity": debt_to_equity,
         "revenue_growth_pct": revenue_growth_pct,
+        "target_mean_price": target_mean_price,
+        "analyst_count": analyst_count,
         "news_items": news_items,
         "upcoming_events": upcoming_events,
     }
@@ -407,21 +427,15 @@ def compute_higgons_score(r: dict):
 def build_ticker_block(r: dict) -> str:
     arrow = "🟢" if r["day_change_pct"] >= 0 else "🔴"
     lines = [f"{arrow} <b>{html.escape(r['symbol'])} — {html.escape(r['name'])}</b>"]
-    lines.append(f"Cours: {fmt_num(r['last_close'])} ({r['day_change_pct']:+.2f}%)")
-    lines.append(f"Volume: {fmt_num(r['last_volume'], 0)} (moy. 20j: {fmt_num(r['avg_volume_20d'], 0)})")
-    lines.append(
-        f"52 sem: {fmt_num(r['week52_low'])} – {fmt_num(r['week52_high'])} "
-        f"({r['pct_from_high']:+.1f}% vs plus haut)"
-    )
 
-    tech_bits = [f"RSI(14): {fmt_num(r['rsi'], 1)}"]
-    if not pd.isna(r["sma50"]):
-        tech_bits.append(f"SMA50: {fmt_num(r['sma50'])}")
-    if not pd.isna(r["sma200"]):
-        tech_bits.append(f"SMA200: {fmt_num(r['sma200'])}")
-    if r["trend"]:
-        tech_bits.append(f"tendance {html.escape(r['trend'])}")
-    lines.append(" | ".join(tech_bits))
+    currency_suffix = f" {html.escape(r['currency'])}" if r.get("currency") else ""
+    lines.append(f"Cours: {fmt_num(r['last_close'])}{currency_suffix} ({r['day_change_pct']:+.2f}%)")
+
+    lines.append(f"52 sem: {r['pct_from_high']:+.1f}% vs plus haut")
+
+    tech_summary = summarize_technicals(r["rsi"], r["trend"])
+    if tech_summary:
+        lines.append(html.escape(tech_summary))
 
     fond_bits = []
     if r["pe_ratio"]:
@@ -434,6 +448,13 @@ def build_ticker_block(r: dict) -> str:
         fond_bits.append(f"Beta: {fmt_num(r['beta'], 2)}")
     if fond_bits:
         lines.append(" | ".join(fond_bits))
+
+    if r.get("target_mean_price") and r.get("analyst_count"):
+        upside = (r["target_mean_price"] - r["last_close"]) / r["last_close"] * 100
+        lines.append(
+            f"🎯 Objectif analystes: {fmt_num(r['target_mean_price'])}{currency_suffix} "
+            f"({upside:+.1f}%, {r['analyst_count']} analystes)"
+        )
 
     # Score & signal "à la Higgons"
     score_bits = [f"Score: {r['score'] if r['score'] is not None else 'n/d'}/100", r["signal"]]
@@ -557,6 +578,8 @@ def main():
         blocks[0] += f"\n🔗 <a href=\"{html.escape(dashboard_url)}\">Dashboard complet</a>"
 
     dashboard_url = os.environ.get("DASHBOARD_URL", "").strip()
+    if dashboard_url:
+        blocks.append(f'🔗 <a href="{html.escape(dashboard_url)}">Voir le dashboard complet</a>')
 
     signal_changes = []
     errors = []
@@ -577,12 +600,15 @@ def main():
             append_history_entry(history, report["symbol"], report["name"], {
                 "date": today_str,
                 "close": clean_for_json(report["last_close"]),
+                "currency": report.get("currency") or None,
                 "day_change_pct": clean_for_json(report["day_change_pct"]),
                 "score": score,
                 "signal": signal,
                 "flags": flags,
                 "pe_ratio": clean_for_json(report["pe_ratio"]),
                 "roe_pct": clean_for_json(report["roe_pct"]),
+                "target_mean_price": clean_for_json(report.get("target_mean_price")),
+                "analyst_count": clean_for_json(report.get("analyst_count")),
             })
 
             blocks.append(build_ticker_block(report))
