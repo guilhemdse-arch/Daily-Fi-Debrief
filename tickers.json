@@ -2,7 +2,7 @@
   {"symbol": "ASML", "name": "ASML", "type": "stock"},
   {"symbol": "MSFT", "name": "Microsoft", "type": "stock"},
   {"symbol": "SAP", "name": "SAP", "type": "stock"},
-  {"symbol": "NOVOBC.XD", "name": "Novo Nordisk", "type": "stock"},
+  {"symbol": "NOVA.DU", "name": "Novo Nordisk", "type": "stock"},
   {"symbol": "KRN.DE", "name": "Krone AG", "type": "stock"},
   {"symbol": "LOUP.PA", "name": "LDC", "type": "stock"},
   {"symbol": "SXR8D.XD", "name": "ishares S&P 500", "type": "etf"},
