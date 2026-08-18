@@ -222,6 +222,61 @@
     font-size: 14px;
   }
 
+  .glossary { margin-top: 28px; }
+  .glossary h2 {
+    font-size: 15px; font-weight: 700; margin: 0 0 6px;
+  }
+  .glossary-intro {
+    font-size: 13px; color: var(--text-dim); line-height: 1.5; margin: 0 0 14px;
+  }
+
+  .glossary details {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+  .glossary summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 13px 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .glossary summary::-webkit-details-marker { display: none; }
+  .glossary summary::after {
+    content: '+';
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--text-dim);
+    transition: transform 0.2s ease;
+  }
+  .glossary details[open] summary::after { transform: rotate(45deg); }
+
+  .glossary dl { margin: 0; padding: 0 16px 14px; }
+  .glossary dt {
+    font-size: 13px; font-weight: 600; color: var(--text);
+    margin-top: 10px;
+  }
+  .glossary dt:first-child { margin-top: 0; }
+  .glossary dd {
+    font-size: 12.5px; color: var(--text-dim); line-height: 1.5;
+    margin: 3px 0 0;
+  }
+  .glossary .method-text {
+    font-size: 12.5px; color: var(--text-dim); line-height: 1.6;
+    padding: 0 16px 14px;
+    margin: 0;
+  }
+  .glossary .method-text b { color: var(--text); }
+  .glossary ul.signal-list {
+    margin: 8px 0 0; padding-left: 18px;
+  }
+  .glossary ul.signal-list li { margin-bottom: 5px; }
+
   footer {
     max-width: 640px;
     margin: 32px auto 0;
@@ -262,10 +317,77 @@
   <div class="list" id="list"></div>
 
   <div id="empty" class="empty-state" style="display:none;"></div>
+
+  <section class="glossary">
+    <h2>Comprendre le score</h2>
+    <p class="glossary-intro">
+      Le score (0-100) et le signal de chaque titre s'appuient sur une approximation de la méthode
+      de William Higgons (décote + qualité). Détails ci-dessous.
+    </p>
+
+    <details>
+      <summary>Critères de décote</summary>
+      <dl>
+        <dt>PER (cours / bénéfice)</dt>
+        <dd>Cours de l'action divisé par le bénéfice par action. Un PER bas signale que le marché valorise peu les bénéfices actuels — c'est le cœur de la décote recherchée.</dd>
+        <dt>Cours / Actif net (Price-to-Book)</dt>
+        <dd>Cours divisé par la valeur comptable des fonds propres par action. Sous 1, le titre cote moins que ce que l'entreprise possède net de dettes.</dd>
+        <dt>Cours / Cash-flow (P/CF)</dt>
+        <dd>Capitalisation boursière divisée par les flux de trésorerie opérationnels générés. Complète le PER en se basant sur le cash réellement généré, plus difficile à manipuler qu'un résultat comptable.</dd>
+      </dl>
+    </details>
+
+    <details>
+      <summary>Critères de qualité</summary>
+      <dl>
+        <dt>ROE (Return on Equity)</dt>
+        <dd>Bénéfice net rapporté aux fonds propres. Mesure la rentabilité dégagée avec l'argent des actionnaires.</dd>
+        <dt>Marge opérationnelle</dt>
+        <dd>Résultat d'exploitation rapporté au chiffre d'affaires. Indique la rentabilité du cœur de métier, hors éléments financiers et exceptionnels.</dd>
+        <dt>ROCE (Return on Capital Employed)</dt>
+        <dd>Résultat d'exploitation rapporté aux capitaux engagés (actif total moins passif courant). Proche du ROE mais neutralise l'effet de levier de la dette.</dd>
+        <dt>Dette nette / fonds propres</dt>
+        <dd>Niveau d'endettement relatif à la taille des fonds propres. Plus c'est bas, moins l'entreprise est vulnérable à une remontée des taux ou un accident de trésorerie.</dd>
+      </dl>
+    </details>
+
+    <details>
+      <summary>Signaux d'alerte</summary>
+      <dl>
+        <dt>Momentum relatif</dt>
+        <dd>Performance du titre sur 6 mois comparée à celle de l'indice de référence de son marché (CAC 40, DAX, FTSE 100 ou S&amp;P 500 selon la place de cotation). Une sous-performance nette peut signaler une information négative manquée.</dd>
+        <dt>Croissance du chiffre d'affaires</dt>
+        <dd>Sert de filtre : une entreprise dont l'activité recule est signalée, même si elle semble décotée sur les autres critères.</dd>
+      </dl>
+    </details>
+
+    <details>
+      <summary>Autres indicateurs affichés</summary>
+      <dl>
+        <dt>Objectif de cours des analystes</dt>
+        <dd>Moyenne des objectifs de cours à 12 mois publiés par les analystes qui suivent le titre. N'entre pas dans le calcul du score : c'est une lecture complémentaire de l'attente du marché, à prendre avec prudence quand peu d'analystes couvrent le titre.</dd>
+      </dl>
+    </details>
+
+    <details>
+      <summary>Calcul du score et du signal</summary>
+      <p class="method-text">
+        Le score est la <b>moyenne de deux sous-scores</b> (décote, qualité), chacun lui-même moyenné
+        sur les seuls critères disponibles pour le titre — une donnée manquante ne pénalise pas
+        artificiellement le score.
+      </p>
+      <ul class="signal-list method-text">
+        <li><b>🔴 Vendre</b> — décote quasi disparue, ou score global sous 40</li>
+        <li><b>🟠 Surveiller</b> — au moins une alerte (CA en baisse ou sous-performance) sans valorisation excessive</li>
+        <li><b>🟢 Conserver / Renforcer</b> — score ≥ 65 sans aucune alerte</li>
+        <li><b>🟢 Conserver</b> — le reste des cas favorables</li>
+      </ul>
+    </details>
+  </section>
 </div>
 
 <footer>
-  Made in Lot & Garonne by GSE. Score basé sur un mix décote + qualité.
+  Score indicatif inspiré de la méthode de William Higgons (décote + qualité). Ne constitue pas un conseil en investissement.
 </footer>
 
 <script>
@@ -299,12 +421,15 @@
         symbol,
         name: t.name || symbol,
         close: last.close,
+        currency: last.currency || '',
         change: last.day_change_pct,
         score: last.score,
         signal: last.signal,
         flags: last.flags || [],
         peRatio: last.pe_ratio,
         roePct: last.roe_pct,
+        targetMeanPrice: last.target_mean_price,
+        analystCount: last.analyst_count,
         history: hist,
       };
     });
@@ -398,7 +523,7 @@
             <span class="card-name">${r.name}</span>
           </div>
           <div class="card-value">
-            <span class="card-price">${fmtNum(r.close)}</span>
+            <span class="card-price">${fmtNum(r.close)}${r.currency ? ' ' + r.currency : ''}</span>
             <span class="card-change ${changeClass}">${changeText}</span>
           </div>
         </div>
@@ -411,6 +536,15 @@
           <div class="detail-meta">
             <div class="detail-item"><div class="k">PER</div><div class="v">${r.peRatio != null ? fmtNum(r.peRatio, 1) : '—'}</div></div>
             <div class="detail-item"><div class="k">ROE</div><div class="v">${r.roePct != null ? fmtNum(r.roePct, 1) + '%' : '—'}</div></div>
+            ${r.targetMeanPrice != null && r.analystCount ? `
+            <div class="detail-item" style="grid-column: 1 / -1;">
+              <div class="k">Objectif analystes (${r.analystCount})</div>
+              <div class="v">${fmtNum(r.targetMeanPrice)}${r.currency ? ' ' + r.currency : ''}
+                <span style="color: ${r.targetMeanPrice >= r.close ? 'var(--green)' : 'var(--red)'}; font-weight: 600;">
+                  (${r.targetMeanPrice >= r.close ? '+' : ''}${fmtNum((r.targetMeanPrice - r.close) / r.close * 100, 1)}%)
+                </span>
+              </div>
+            </div>` : ''}
           </div>
         </div>
       `;
