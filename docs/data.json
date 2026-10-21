@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T19:30:17.535258",
+  "generated_at": "2026-10-21T19:29:38.555687",
   "tickers": {
     "MSFT": {
       "name": "Microsoft",
@@ -1074,6 +1074,21 @@
           "roe_pct": 34.039003,
           "target_mean_price": 599.27527,
           "analyst_count": 53
+        },
+        {
+          "date": "2026-10-21",
+          "close": 532.2050170898438,
+          "currency": "USD",
+          "day_change_pct": 0.0629894477469883,
+          "score": 50,
+          "signal": "🔴 Vendre",
+          "flags": [
+            "Valorisation élevée"
+          ],
+          "pe_ratio": 29.649303,
+          "roe_pct": 34.039003,
+          "target_mean_price": 600.8791,
+          "analyst_count": 53
         }
       ]
     },
@@ -2137,6 +2152,21 @@
           "pe_ratio": 40.114666,
           "roe_pct": 65.636003,
           "target_mean_price": 2150.166,
+          "analyst_count": 17
+        },
+        {
+          "date": "2026-10-21",
+          "close": 1675.199951171875,
+          "currency": "USD",
+          "day_change_pct": 2.7200697972378562,
+          "score": 50,
+          "signal": "🔴 Vendre",
+          "flags": [
+            "Valorisation élevée"
+          ],
+          "pe_ratio": 41.22047,
+          "roe_pct": 65.636003,
+          "target_mean_price": 2148.4758,
           "analyst_count": 17
         }
       ]
@@ -3202,6 +3232,21 @@
           "roe_pct": 18.320999,
           "target_mean_price": 261.16666,
           "analyst_count": 12
+        },
+        {
+          "date": "2026-10-21",
+          "close": 231.6300048828125,
+          "currency": "USD",
+          "day_change_pct": 1.1573103348410645,
+          "score": 47,
+          "signal": "🔴 Vendre",
+          "flags": [
+            "Valorisation élevée"
+          ],
+          "pe_ratio": 29.734276,
+          "roe_pct": 18.320999,
+          "target_mean_price": 261.16666,
+          "analyst_count": 12
         }
       ]
     },
@@ -4115,6 +4160,19 @@
           "close": 61.779998779296875,
           "currency": "EUR",
           "day_change_pct": -0.33876898448749304,
+          "score": null,
+          "signal": "Données insuffisantes",
+          "flags": [],
+          "pe_ratio": null,
+          "roe_pct": null,
+          "target_mean_price": null,
+          "analyst_count": null
+        },
+        {
+          "date": "2026-10-21",
+          "close": 62.619998931884766,
+          "currency": "EUR",
+          "day_change_pct": 1.3596635953145786,
           "score": null,
           "signal": "Données insuffisantes",
           "flags": [],
@@ -5042,6 +5100,19 @@
           "roe_pct": null,
           "target_mean_price": null,
           "analyst_count": null
+        },
+        {
+          "date": "2026-10-21",
+          "close": 131.22500610351562,
+          "currency": "EUR",
+          "day_change_pct": 0.6056722196563763,
+          "score": null,
+          "signal": "Données insuffisantes",
+          "flags": [],
+          "pe_ratio": null,
+          "roe_pct": null,
+          "target_mean_price": null,
+          "analyst_count": null
         }
       ]
     },
@@ -5955,6 +6026,19 @@
           "close": 35.03499984741211,
           "currency": "EUR",
           "day_change_pct": -0.9191197888280292,
+          "score": null,
+          "signal": "Données insuffisantes",
+          "flags": [],
+          "pe_ratio": null,
+          "roe_pct": null,
+          "target_mean_price": null,
+          "analyst_count": null
+        },
+        {
+          "date": "2026-10-21",
+          "close": 35.189998626708984,
+          "currency": "EUR",
+          "day_change_pct": 0.44241124581687163,
           "score": null,
           "signal": "Données insuffisantes",
           "flags": [],
@@ -6912,6 +6996,19 @@
           "roe_pct": 14.051,
           "target_mean_price": 146.5,
           "analyst_count": 10
+        },
+        {
+          "date": "2026-10-21",
+          "close": 115.0,
+          "currency": "EUR",
+          "day_change_pct": 1.7699115044247788,
+          "score": 55,
+          "signal": "🟢 Conserver",
+          "flags": [],
+          "pe_ratio": 12.445888,
+          "roe_pct": 14.051,
+          "target_mean_price": 146.2,
+          "analyst_count": 10
         }
       ]
     },
@@ -7792,6 +7889,19 @@
           "roe_pct": 13.294,
           "target_mean_price": 137.75,
           "analyst_count": 4
+        },
+        {
+          "date": "2026-10-21",
+          "close": 105.0,
+          "currency": "EUR",
+          "day_change_pct": 0.9615384615384616,
+          "score": 69,
+          "signal": "🟢 Conserver / Renforcer",
+          "flags": [],
+          "pe_ratio": 11.462882,
+          "roe_pct": 13.294,
+          "target_mean_price": 137.75,
+          "analyst_count": 4
         }
       ]
     },
@@ -8622,6 +8732,19 @@
           "close": 34.79999923706055,
           "currency": "EUR",
           "day_change_pct": 1.5761848861152474,
+          "score": null,
+          "signal": "Données insuffisantes",
+          "flags": [],
+          "pe_ratio": null,
+          "roe_pct": null,
+          "target_mean_price": null,
+          "analyst_count": null
+        },
+        {
+          "date": "2026-10-21",
+          "close": 34.880001068115234,
+          "currency": "EUR",
+          "day_change_pct": 0.22989032416267668,
           "score": null,
           "signal": "Données insuffisantes",
           "flags": [],
@@ -9486,6 +9609,21 @@
             "Valorisation élevée"
           ],
           "pe_ratio": 25.955727,
+          "roe_pct": 29.848000000000003,
+          "target_mean_price": 817.87445,
+          "analyst_count": 58
+        },
+        {
+          "date": "2026-10-21",
+          "close": 703.8665161132812,
+          "currency": "USD",
+          "day_change_pct": 1.385166166839215,
+          "score": 45,
+          "signal": "🔴 Vendre",
+          "flags": [
+            "Valorisation élevée"
+          ],
+          "pe_ratio": 26.529013,
           "roe_pct": 29.848000000000003,
           "target_mean_price": 817.87445,
           "analyst_count": 58
