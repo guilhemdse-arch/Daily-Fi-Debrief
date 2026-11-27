@@ -1,13 +1,15 @@
 [
+  {"symbol": "DG.PA", "name": "VINCI", "type": "stock"},
   {"symbol": "ASML", "name": "ASML", "type": "stock"},
-  {"symbol": "MSFT", "name": "Microsoft", "type": "stock"},
   {"symbol": "SAP", "name": "SAP", "type": "stock"},
-  {"symbol": "NOVA.DU", "name": "Novo Nordisk", "type": "stock"},
-  {"symbol": "META", "name": "Meta", "type": "stock"},
-  {"symbol": "KRN.DE", "name": "Krone AG", "type": "stock"},
   {"symbol": "LOUP.PA", "name": "LDC", "type": "stock"},
-  {"symbol": "SXR8D.XD", "name": "ishares S&P 500", "type": "etf"},
-  {"symbol": "EXW1.DE", "name": "ishares Eurostoxx 50", "type": "etf"},
+  {"symbol": "MSFT", "name": "Microsoft", "type": "stock"},
+  {"symbol": "META", "name": "Meta", "type": "stock"},
+  {"symbol": "GOOG", "name": "Alphabet", "type": "stock"},
+  {"symbol": "NVDA", "name": "Nvidia", "type": "stock"},
+  {"symbol": "NOVA.DU", "name": "Novo Nordisk", "type": "stock"},
   {"symbol": "EUNL.DE", "name": "iShares Core MSCI World", "type": "etf"},
+  {"symbol": "SXR8.DE", "name": "iShares Core S&P 500", "type": "etf"},
+  {"symbol": "EXW1.DE", "name": "iShares Core Euro Stoxx 50", "type": "etf"},
   {"symbol": "PAEEM.PA", "name": "Amundi PEA Émergent", "type": "etf"}
 ]

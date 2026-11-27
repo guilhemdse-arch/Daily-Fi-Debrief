@@ -2,15 +2,19 @@ name: Rapport quotidien portefeuille
 
 on:
   schedule:
-    # 16:30 UTC = 18:30 heure d'été à Paris (CEST, UTC+2) / 19:30 en hiver (CET, UTC+1).
-    # GitHub Actions ne gère pas le changement d'heure automatiquement :
-    # passe à "30 17 * * *" fin octobre pour rester sur 18:30 heure de Paris en hiver.
-    - cron: "30 15 * * *"
+    # Horaires en UTC. 16:45 UTC = 17:45 à Paris en hiver (après la clôture d'Euronext à 17:30).
+    # En été (fin mars), passer à "45 15 * * 1-5" pour garder 17:45 heure de Paris.
+    # Avant, le rapport tournait à 16:30 Paris en hiver, avant la clôture : les cours étaient incomplets.
+    - cron: "45 16 * * 1-5"
   workflow_dispatch: {}  # permet de lancer le workflow manuellement pour tester
 
 permissions:
   contents: write
-  
+
+concurrency:
+  group: commit-docs
+  cancel-in-progress: false
+
 jobs:
   send-report:
     runs-on: ubuntu-latest
@@ -36,5 +40,7 @@ jobs:
           git config user.name "portfolio-bot"
           git config user.email "actions@users.noreply.github.com"
           git add docs/data.json
-          git diff --quiet --cached || git commit -m "Mise à jour quotidienne $(date -u +%F)"
-          git push
+          git diff --quiet --cached && exit 0
+          git commit -m "Mise à jour quotidienne $(date -u +%F)"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
+          exit 1

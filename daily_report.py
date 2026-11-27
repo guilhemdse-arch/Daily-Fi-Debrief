@@ -149,6 +149,8 @@ def compute_relative_momentum(hist: pd.DataFrame, symbol: str, benchmark_cache: 
     if bench_symbol not in benchmark_cache:
         try:
             bench_hist = retry(yf.Ticker(bench_symbol).history, period=HISTORY_PERIOD, interval="1d")
+            if bench_hist is not None and not bench_hist.empty:
+                bench_hist = bench_hist.dropna(subset=["Close"])
             benchmark_cache[bench_symbol] = bench_hist
         except Exception:
             benchmark_cache[bench_symbol] = None
@@ -220,6 +222,9 @@ def fetch_ticker_report(entry: dict, benchmark_cache: dict) -> dict:
     ticker = yf.Ticker(symbol)
 
     hist = retry(ticker.history, period=HISTORY_PERIOD, interval="1d")
+    if hist is not None and not hist.empty:
+        # Retire les lignes sans clôture (séance en cours ou données partielles de Yahoo)
+        hist = hist.dropna(subset=["Close"])
     if hist is None or hist.empty or len(hist) < 2:
         raise ValueError(f"Historique indisponible pour {symbol}")
 
