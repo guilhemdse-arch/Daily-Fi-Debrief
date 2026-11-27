@@ -118,3 +118,12 @@ docs/data.json                     # historique + données du dashboard (génér
 - Le score ne remplace pas l'analyse qualitative que W. Higgons dit
   lui-même appliquer en complément (comprendre le business, éviter les
   "value traps") — à traiter comme une aide à la décision.
+
+## Instantané des marchés (`market_snapshot.py`)
+
+Le workflow **Instantané des marchés** (`.github/workflows/market-snapshot.yml`) récupère via yfinance les cours du portefeuille, des indices, taux, devises, matières premières et cryptos, et publie :
+
+- `docs/market.json` : clôtures, variations, cours en euros, MM20/50/200, RSI 14, performances, plus hauts/bas 52 semaines, fondamentaux et un an d'historique ;
+- `docs/market-latest.md` : le même instantané sous forme de tableau.
+
+Il tourne en semaine vers 6h10, 17h45 et 22h20 (heure de Paris, hiver) et le dimanche vers 17h30. Les briefs et revues de Claude lisent ce fichier comme source de cours prioritaire. Aucune quantité ni aucun montant personnel n'y est écrit (dépôt public).

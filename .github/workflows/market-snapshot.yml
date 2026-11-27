@@ -1,0 +1,45 @@
+name: Instantané des marchés
+
+on:
+  schedule:
+    # Horaires en UTC (GitHub ne gère pas l'heure d'été). Hiver : Paris = UTC+1 ; été : UTC+2.
+    - cron: "10 5 * * 1-5"    # ~6h10 Paris (hiver) : avant le brief du matin de 7h45
+    - cron: "45 16 * * 1-5"   # ~17h45 Paris (hiver) : après la clôture d'Euronext (17h30)
+    - cron: "20 21 * * 1-5"   # ~22h20 Paris (hiver) : après la clôture de Wall Street
+    - cron: "30 16 * * 0"     # dimanche ~17h30 Paris : pour la veille macro hebdomadaire
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: commit-docs
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Récupérer les données de marché
+        run: python market_snapshot.py
+
+      - name: Publier docs/market.json
+        run: |
+          git config user.name "portfolio-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/market.json docs/market-latest.md
+          git diff --quiet --cached && exit 0
+          git commit -m "Instantané marchés $(date -u +'%F %H:%M') UTC"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
+          exit 1
