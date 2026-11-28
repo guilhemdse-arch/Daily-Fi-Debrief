@@ -1,38 +1,38 @@
-# Marchés — instantané du 2026-11-27 18:51 (heure de Paris)
+# Marchés — instantané du 2026-11-28 04:20 (heure de Paris)
 
 | Clé | Nom | Date | Clôture | Devise | Var. jour | En € | Perf 1 m | RSI 14 |
 |---|---|---|---:|---|---:|---:|---:|---:|
-| VINCI | VINCI | 2026-11-27 | 115,40 | EUR | 0,79 % | 115,40 | 6,56 % | 61,9 |
-| ASML | ASML | 2026-11-27 | 1 198,00 | EUR | 2,55 % | 1 198,00 | -19,58 % | 40,8 |
-| SAP | SAP | 2026-11-27 | 195,64 | EUR | 0,77 % | 195,64 | -7,37 % | 45,7 |
-| LDC | LDC | 2026-11-27 | 103,80 | EUR | 0,97 % | 103,80 | -0,38 % | 42,4 |
-| MSFT | Microsoft | 2026-11-27 ⏳ en séance | 491,43 | USD | 0,31 % | 449,27 | -7,45 % | 39,6 |
-| META | Meta Platforms | 2026-11-27 ⏳ en séance | 627,08 | USD | 2,82 % | 573,28 | 2,38 % | 49,9 |
-| GOOG | Alphabet | 2026-11-27 ⏳ en séance | 271,31 | USD | 0,12 % | 248,03 | -15,71 % | 36,4 |
-| NVDA | Nvidia | 2026-11-27 ⏳ en séance | 148,97 | USD | -0,22 % | 136,19 | -30,83 % | 37,3 |
-| NOVO | Novo Nordisk | 2026-11-27 | 280,60 | DKK | 1,21 % | 37,55 | 10,04 % | 59,2 |
-| EUNL | iShares Core MSCI World | 2026-11-27 | 127,20 | EUR | 1,09 % | 127,20 | -3,43 % | 48,6 |
-| SXR8 | iShares Core S&P 500 (cap.) | 2026-11-27 | 719,18 | EUR | 0,99 % | 719,18 | -4,03 % | 48,4 |
-| IUSA | iShares Core S&P 500 (dist.) | 2026-11-27 | 66,34 | EUR | 0,94 % | 66,34 | -4,06 % | 48,2 |
-| EXW1 | iShares Core Euro Stoxx 50 (dist.) | 2026-11-27 | 61,61 | EUR | 1,23 % | 61,61 | -0,98 % | 47,3 |
-| EUN2 | iShares Core Euro Stoxx 50 (cap.) | 2026-11-27 | 62,11 | EUR | 1,19 % | 62,11 | -1,26 % | 46,6 |
-| PAEEM | Amundi PEA Émergents | 2026-11-27 | 32,91 | EUR | 2,52 % | 32,91 | -6,65 % | 47,4 |
+| VINCI | VINCI | 2026-11-26 | 114,50 | EUR | 1,87 % | 114,50 | 5,38 % | 59,4 |
+| ASML | ASML | 2026-11-26 | 1 168,20 | EUR | 3,23 % | 1 168,20 | -20,53 % | 38,0 |
+| SAP | SAP | 2026-11-26 | 194,14 | EUR | 2,28 % | 194,14 | -8,92 % | 43,8 |
+| LDC | LDC | 2026-11-26 | 102,80 | EUR | -0,19 % | 102,80 | -0,77 % | 36,0 |
+| MSFT | Microsoft | 2026-11-27 | 492,85 | USD | 0,60 % | 449,18 | -7,19 % | 40,4 |
+| META | Meta Platforms | 2026-11-27 | 628,96 | USD | 3,13 % | 573,23 | 2,69 % | 50,3 |
+| GOOG | Alphabet | 2026-11-27 | 272,44 | USD | 0,54 % | 248,30 | -15,36 % | 37,3 |
+| NVDA | Nvidia | 2026-11-27 | 150,49 | USD | 0,80 % | 137,16 | -30,13 % | 38,1 |
+| NOVO | Novo Nordisk | 2026-11-26 | 277,25 | DKK | 1,08 % | 37,10 | 6,84 % | 56,6 |
+| EUNL | iShares Core MSCI World | 2026-11-26 | 125,83 | EUR | 2,93 % | 125,83 | -4,39 % | 45,2 |
+| SXR8 | iShares Core S&P 500 (cap.) | 2026-11-26 | 712,14 | EUR | 3,20 % | 712,14 | -4,82 % | 45,6 |
+| IUSA | iShares Core S&P 500 (dist.) | 2026-11-26 | 65,72 | EUR | 3,17 % | 65,72 | -4,82 % | 45,5 |
+| EXW1 | iShares Core Euro Stoxx 50 (dist.) | 2026-11-26 | 60,86 | EUR | 2,10 % | 60,86 | -2,12 % | 43,3 |
+| EUN2 | iShares Core Euro Stoxx 50 (cap.) | 2026-11-26 | 61,38 | EUR | 2,06 % | 61,38 | -2,34 % | 42,8 |
+| PAEEM | Amundi PEA Émergents | 2026-11-26 | 32,10 | EUR | 4,00 % | 32,10 | -7,89 % | 43,2 |
 | CAC40 | CAC 40 | 2026-11-27 | 8 156,09 | EUR | 0,58 % | — | 3,41 % | 53,5 |
 | EUROSTOXX50 | Euro Stoxx 50 | 2026-11-27 | 6 089,20 | EUR | 1,24 % | — | -1,27 % | 46,7 |
 | DAX | DAX | 2026-11-27 | 25 441,24 | EUR | 0,90 % | — | -1,02 % | 47,4 |
-| SP500 | S&P 500 | 2026-11-27 ⏳ en séance | 7 273,26 | USD | 1,26 % | — | -6,08 % | 43,8 |
-| NASDAQ | Nasdaq Composite | 2026-11-27 ⏳ en séance | 24 007,60 | USD | 1,79 % | — | -9,58 % | 42,7 |
-| MSCI_WORLD_USD | MSCI World (ETF URTH, USD) | 2026-11-27 ⏳ en séance | 196,88 | USD | 1,20 % | — | -5,38 % | 43,9 |
-| VIX | VIX | 2026-11-27 ⏳ en séance | 24,57 | USD | -8,32 % | — | 45,30 % | 52,1 |
-| SP500_FUT | Future S&P 500 | 2026-11-27 ⏳ en séance | 7 287,25 | USD | 1,27 % | — | -6,37 % | 43,4 |
-| NASDAQ_FUT | Future Nasdaq 100 | 2026-11-27 ⏳ en séance | 26 587,00 | USD | 1,86 % | — | -11,32 % | 41,9 |
-| US10Y | Taux US 10 ans (%) | 2026-11-27 ⏳ en séance | 4,93 | USD | 1,67 % | — | -2,30 % | 44,9 |
-| EURUSD | EUR/USD | 2026-11-27 ⏳ en séance | 1,09 | USD | -0,29 % | — | -1,72 % | 31,8 |
-| EURDKK | EUR/DKK | 2026-11-27 ⏳ en séance | 7,47 | DKK | 0,00 % | — | -0,01 % | 41,5 |
-| EURGBP | EUR/GBP | 2026-11-27 ⏳ en séance | 0,83 | GBP | -0,20 % | — | -0,14 % | 41,7 |
-| BRENT | Pétrole Brent ($) | 2026-11-27 ⏳ en séance | 90,05 | USD | -4,82 % | — | -21,91 % | 38,6 |
-| OR | Or ($/once) | 2026-11-27 ⏳ en séance | 3 661,90 | USD | 3,57 % | — | -9,62 % | 38,4 |
-| BLE | Blé CBOT (cents/boisseau) | 2026-11-27 ⏳ en séance | 590,75 | USX | 4,47 % | — | -1,38 % | 45,7 |
-| MAIS | Maïs CBOT (cents/boisseau) | 2026-11-27 ⏳ en séance | 464,00 | USX | 5,51 % | — | 2,71 % | 59,5 |
-| BTC | Bitcoin (€) | 2026-11-27 ⏳ en séance | 54 527,32 | EUR | -1,12 % | — | -25,15 % | 28,7 |
-| ETH | Ethereum (€) | 2026-11-27 ⏳ en séance | 1 519,07 | EUR | -1,27 % | — | -28,12 % | 29,4 |
+| SP500 | S&P 500 | 2026-11-27 | 7 297,49 | USD | 1,60 % | — | -5,77 % | 44,9 |
+| NASDAQ | Nasdaq Composite | 2026-11-27 | 24 129,50 | USD | 2,31 % | — | -9,12 % | 43,8 |
+| MSCI_WORLD_USD | MSCI World (ETF URTH, USD) | 2026-11-27 | 197,66 | USD | 1,60 % | — | -5,00 % | 45,2 |
+| VIX | VIX | 2026-11-27 | 23,81 | USD | -11,16 % | — | 40,80 % | 51,0 |
+| SP500_FUT | Future S&P 500 | 2026-11-27 | 7 308,25 | USD | 1,56 % | — | -6,10 % | 44,3 |
+| NASDAQ_FUT | Future Nasdaq 100 | 2026-11-27 | 26 765,00 | USD | 2,55 % | — | -10,72 % | 43,3 |
+| US10Y | Taux US 10 ans (%) | 2026-11-27 | 4,94 | USD | 1,82 % | — | -2,16 % | 45,5 |
+| EURUSD | EUR/USD | 2026-11-27 | 1,10 | USD | 0,02 % | — | -1,42 % | 34,7 |
+| EURDKK | EUR/DKK | 2026-11-28 ⏳ en séance | 7,47 | DKK | 0,01 % | — | -0,00 % | 44,1 |
+| EURGBP | EUR/GBP | 2026-11-27 | 0,84 | GBP | 0,03 % | — | 0,09 % | 47,3 |
+| BRENT | Pétrole Brent ($) | 2026-11-27 | 90,84 | USD | -3,98 % | — | -21,23 % | 39,5 |
+| OR | Or ($/once) | 2026-11-27 | 3 668,50 | USD | 3,75 % | — | -9,46 % | 38,9 |
+| BLE | Blé CBOT (cents/boisseau) | 2026-11-27 | 591,00 | USX | 4,51 % | — | -1,34 % | 45,8 |
+| MAIS | Maïs CBOT (cents/boisseau) | 2026-11-27 | 463,00 | USX | 5,29 % | — | 2,49 % | 58,9 |
+| BTC | Bitcoin (€) | 2026-11-28 ⏳ en séance | 54 784,11 | EUR | -0,66 % | — | -21,23 % | 29,2 |
+| ETH | Ethereum (€) | 2026-11-28 ⏳ en séance | 1 521,01 | EUR | -1,14 % | — | -24,39 % | 29,5 |
